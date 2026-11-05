@@ -1,0 +1,53 @@
+==============================================
+LOCAL DEVELOPMENT RUN COMMANDS
+==============================================
+
+1. Run Backend (Local):
+    cd brscmpr-backend
+    npm install
+    npm run dev
+
+2. Run Frontend (Local):
+    cd brscmpr-frontend
+    npm install
+    npm start
+
+    To access over local network (LAN / Wi-Fi / Hotspot):
+    ng serve --host 0.0.0.0
+
+
+==============================================
+WINDOWS SERVER PRODUCTION COMMANDS (PM2)
+==============================================
+
+1. Initial Setup:
+    npm install -g pm2
+    npm install -g pm2-windows-startup
+    npx pm2-windows-startup install
+
+2. Start Backend on Server:
+    cd brscmpr-backend
+    npx pm2 start server.js --name "brsc-mpr-backend"
+    npx pm2 save
+
+3. Stop Backend on Server:
+    npx pm2 stop brsc-mpr-backend
+
+4. Restart Backend on Server:
+    npx pm2 restart brsc-mpr-backend
+
+5. Check Backend Status:
+    npx pm2 status
+
+6. View Live Backend Logs:
+    npx pm2 logs brsc-mpr-backend
+
+7. Completely Remove from PM2:
+    npx pm2 delete brsc-mpr-backend
+    npx pm2 save
+
+
+==============================================
+QUICK KILL PROCESS ON PORT 5000 (POWERSHELL)
+==============================================
+Get-Process -Id (Get-NetTCPConnection -LocalPort 5000 -State Listen -ErrorAction SilentlyContinue).OwningProcess -ErrorAction SilentlyContinue | Stop-Process -Force
